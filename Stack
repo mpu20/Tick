@@ -1,0 +1,57 @@
+def checkstatus():
+    if end - front + 1 == 0:
+        return "EMPTY"
+    else:
+        if end - front + 1 == n:
+            return "FULL"
+        else:
+            return "NORMAL"
+
+
+front = 0
+end = -1
+n_and_q = list(map(int, input().split()))
+n = n_and_q[0]
+q = n_and_q[1]
+stack = [0] * n
+for i in range(q):
+    inp = input()
+    job = inp.split()[0]
+    if job == "push":
+        if checkstatus() == "FULL":
+            print("FULL")
+            continue
+        number = inp.split()[1]
+        print(job.upper())
+        end += 1
+        stack[end] = number
+        continue
+    if job == "pop":
+        if checkstatus() == "EMPTY":
+            print("EMPTY")
+            continue
+        print(job.upper())
+        end -= 1
+        continue
+    if job == "top":
+        if checkstatus() == "EMPTY":
+            print("EMPTY")
+            continue
+        print(job.upper(), end=' ')
+        print(stack[end])
+        continue
+    if job == "size":
+        print(job.upper(), end=' ')
+        print(end - front + 1)
+        continue
+    if job == "clear":
+        print(job.upper())
+        front = 0
+        end = -1
+        continue
+    if job == "all":
+        print(job.upper(), end=' ')
+        for j in range(front, end + 1):
+            print(stack[j], end=' ')
+        print('')
+        continue
